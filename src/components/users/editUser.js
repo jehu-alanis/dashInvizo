@@ -12,23 +12,12 @@ import {
     CCardHeader,
   } from '@coreui/react';
 
-  const generateRandomPassword = (length = 12) => {
-    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+[]{}|;:,.<>?";
-    let password = "";
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * charset.length);
-      password += charset[randomIndex];
-    }
-    return password;
-  };
   
-  const NewUser = () => {
-
+  const EditUser = () => {
     const [userDetails, setUserDetails] = useState({
       email: '',
       userType: '',
       name: '',
-      password: generateRandomPassword(),
     });
 
     const dispatch = useDispatch();
@@ -50,7 +39,6 @@ import {
         email: '',
         userType: '',
         name: '',
-        password: generateRandomPassword(),
       });
     };
   
@@ -98,9 +86,6 @@ import {
             />
           </div>
 
-          {/* Campo invisible para almacenar la contraseña */}
-          <input type="hidden" value={userDetails.password} />
-
           <CButton type="submit" color="primary">
             Crear Usuario
           </CButton>
@@ -110,4 +95,4 @@ import {
   );
 };
   
-  export default NewUser;
+  export default EditUser;

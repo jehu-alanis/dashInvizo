@@ -6,6 +6,7 @@ const initialState = {
   theme: 'light',
   isAuthenticated: false,  // Estado de autenticación
   user: null,              // Estado de usuario
+  users: [],
 };
 
 const changeState = (state = initialState, { type, payload }) => {
@@ -16,6 +17,8 @@ const changeState = (state = initialState, { type, payload }) => {
       return { ...state, isAuthenticated: payload };
     case 'SET_USER':    // Caso para actualizar el usuario
       return { ...state, user: payload };
+    case 'SET_USERS':   // Manejar el estado de los usuarios
+      return { ...state, users: payload };
     default:
       return state;
   }

@@ -19,7 +19,7 @@ export const createUserInFirestore = (user) => {
         // Agrega el usuario a Firestore
         const docRef = await addDoc(collection(db, 'users'), {
           ...user,
-          uid: userAuth.uid, // Incluye el UID del usuario autenticado en Firestore
+          uid: userAuth.uid,
         });
   
         console.log('Usuario guardado en Firestore con ID: ', docRef.id);

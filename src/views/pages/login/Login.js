@@ -28,6 +28,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,7 +48,7 @@ const Login = () => {
           <CCol md={8}>
             <CCardGroup>
               <CCard className="p-4">
-                <CCardBody>
+                 <CCardBody>
                   <CForm onSubmit={handleSubmit}>
                     <h1>Login</h1>
                     <p className="text-body-secondary">Inicia sesión</p>
@@ -67,12 +68,21 @@ const Login = () => {
                         <CIcon icon={cilLockLocked} />
                       </CInputGroupText>
                       <CFormInput
-                        type="password"
+                        type={showPassword ? 'text' : 'password'} // Mostrar u ocultar la contraseña
                         placeholder="Password"
                         autoComplete="current-password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
+                      <CInputGroupText>
+                        <CButton
+                          color="link"
+                          className="px-0"
+                          onClick={() => setShowPassword(!showPassword)} // Alternar visibilidad
+                        >
+                          {showPassword ? 'Ocultar' : 'Mostrar'} {/* Texto del botón */}
+                        </CButton>
+                      </CInputGroupText>
                     </CInputGroup>
                     {error && <p className="text-danger">{error}</p>}
                     <CRow>
@@ -83,13 +93,14 @@ const Login = () => {
                       </CCol>
                       <CCol xs={6} className="text-right">
                         <CButton color="link" className="px-0">
-                          Olvidaste tu password?
+                          ¿Olvidaste tu password?
                         </CButton>
                       </CCol>
                     </CRow>
                   </CForm>
                 </CCardBody>
               </CCard>
+
               <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
                 <CCardBody className="text-center">
                   <div>
