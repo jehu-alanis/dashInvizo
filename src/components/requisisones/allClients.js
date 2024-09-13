@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTable, CTableBody, CTableHead, CTableHeaderCell, CTableRow, CTableDataCell, CButton } from '@coreui/react';
-import { fetchUsers } from '../../actions/fetchUsers';
+import { fetchClient } from '../../actions/fetchClient';
+
 import { cilPencil, cilTrash } from '@coreui/icons'; // Íconos de CoreUI
 import CIcon from '@coreui/icons-react'
 
-const AllUsers = () => {
+const AllClients = () => {
     const dispatch = useDispatch();
-    const users = useSelector(state => state.users);
+    const clients = useSelector(state => state.clients);
 
     useEffect(() => {
-        dispatch(fetchUsers());
+        dispatch(fetchClient());
     }, [dispatch]);
 
     const handleEdit = (userId) => {
@@ -27,20 +28,28 @@ const AllUsers = () => {
     <CTable striped hover>
       <CTableHead>
         <CTableRow>
-          <CTableHeaderCell>#</CTableHeaderCell>
           <CTableHeaderCell>Nombre</CTableHeaderCell>
-          <CTableHeaderCell>Email</CTableHeaderCell>
-          <CTableHeaderCell>Tipo de Usuario</CTableHeaderCell>
+          <CTableHeaderCell>N Pedido</CTableHeaderCell>
+          <CTableHeaderCell>Graduacion Ojo D</CTableHeaderCell>
+          <CTableHeaderCell>Graduacion Ojo I</CTableHeaderCell>
+          <CTableHeaderCell>Tipo de Armazon</CTableHeaderCell>
+          <CTableHeaderCell>Tipo de Mica</CTableHeaderCell>
+          <CTableHeaderCell>Tipo de reflejo</CTableHeaderCell>
           <CTableHeaderCell>Acciones</CTableHeaderCell>
+
+
         </CTableRow>
       </CTableHead>
       <CTableBody>
-        {users.map((user, index) => (
+        {clients.map((user, index) => (
           <CTableRow key={user.id}>
-            <CTableDataCell>{index + 1}</CTableDataCell>
-            <CTableDataCell>{user.name}</CTableDataCell>
-            <CTableDataCell>{user.email}</CTableDataCell>
-            <CTableDataCell>{user.userType}</CTableDataCell>
+            <CTableDataCell>{user.nombre}</CTableDataCell>
+            <CTableDataCell>{user.numeroPedido}</CTableDataCell>
+            <CTableDataCell>{user.graduacionOD}</CTableDataCell>
+            <CTableDataCell>{user.graduacionOI}</CTableDataCell>
+            <CTableDataCell>{user.tipoArmazon}</CTableDataCell>
+            <CTableDataCell>{user.tipoMica}</CTableDataCell>
+            <CTableDataCell>{user.tipoReflejo}</CTableDataCell>
             <CTableDataCell>
               <CButton size="sm" className="mr-2" onClick={() => handleEdit(user.id)}>
                 <CIcon icon={cilPencil}  className="text-info"/> Editar
@@ -56,4 +65,4 @@ const AllUsers = () => {
   );
 };
 
-export default AllUsers;
+export default AllClients;

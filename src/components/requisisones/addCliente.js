@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUserInFirestore } from '../../actions/addUser';
+
+import { setRequesicion } from '../../actions/addRequisicion';
+
 import {
     CForm,
     CFormLabel,
@@ -12,16 +15,6 @@ import {
     CCardHeader,
   } from '@coreui/react';
 
-  const generateRandomPassword = (length = 12) => {
-    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+[]{}|;:,.<>?";
-    let password = "";
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * charset.length);
-      password += charset[randomIndex];
-    }
-    return password;
-  };
-  
   const NewUser = () => {
 
     const [userDetails, setUserDetails] = useState({
@@ -46,7 +39,7 @@ import {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      dispatch(createUserInFirestore(userDetails));
+      dispatch(setRequesicion(userDetails));
       // Restablecemos el estado a los valores iniciales
       setUserDetails({
         email: '',
@@ -104,7 +97,7 @@ import {
           <input type="hidden" value={userDetails.password} />
 
           <CButton type="submit" color="primary">
-            Crear Usuario
+            Crear Requisicion
           </CButton>
         </CForm>
          {/* Mostrar el mensaje de éxito si existe */}

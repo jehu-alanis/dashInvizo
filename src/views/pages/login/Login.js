@@ -32,8 +32,10 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
     } catch (error) {
       setError('Error al iniciar sesión. Verifica tus credenciales.');
       console.error('Error en el login:', error.message);

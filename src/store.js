@@ -7,6 +7,11 @@ const initialState = {
   isAuthenticated: false,  // Estado de autenticación
   user: null,              // Estado de usuario
   users: [],
+  successMessage: false,
+  errorMessage: false,
+  clients: [],
+  requisicion: [],
+
 };
 
 const changeState = (state = initialState, { type, payload }) => {
@@ -16,9 +21,15 @@ const changeState = (state = initialState, { type, payload }) => {
     case 'SET_AUTHENTICATED':
       return { ...state, isAuthenticated: payload };
     case 'SET_USER':    // Caso para actualizar el usuario
-      return { ...state, user: payload };
+      return { ...state, user: payload, successMessage: payload.successMessage, errorMessage: payload.errorMessage,  };
     case 'SET_USERS':   // Manejar el estado de los usuarios
-      return { ...state, users: payload };
+      return { ...state, users: payload,  };
+    case 'SET_REQUISICION':   // Manejar el estado de los usuarios
+      return { ...state, requisicion: payload,  };
+    case 'SET_CLEAN':   // Manejar el estado de los usuarios
+      return { ...state, successMessage: false, errorMessage: false,  };
+    case 'SET_REQUISICION':   // Manejar el estado de los usuarios
+      return { ...state, requisicion: requisicion.concat(payload.requisicion), successMessage: false, errorMessage: false,  };
     default:
       return state;
   }

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { CCard, CCardHeader, CCardBody, CButton, CModal, CModalHeader, CModalBody, CModalFooter } from '@coreui/react';
-import NewUser from '../../components/users/newUser';
-import AllUsers from '../../components/users/allUser';
+
+import NewUser from '../../components/requisisones/addCliente';
+import AllClient from '../../components/requisisones/allClients';
+
 import { setClean } from '../../actions/setClean';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -15,32 +17,30 @@ const Index = () => {
     dispatch(setClean());
     setModalVisible(!modalVisible);
   };
-
-  console.log(modalVisible,"modalVisible");
-
+                                 
   return (
     <>
       <CCard>
         <CCardHeader>
-          Usuarios
+          Requisiciones
           <CButton 
             color="primary" 
             onClick={toggleModal} 
             className="ml-auto" 
             style={{ float: 'right' }}  // Estilo para alinear el botón a la derecha
           >
-            Nuevo Usuario
+            Nueva Requisicion
           </CButton>
         </CCardHeader>
         <CCardBody>
-          <AllUsers />
+          <AllClient />
         </CCardBody>
       </CCard>
 
       {/* Modal para agregar un nuevo usuario */}
       <CModal visible={modalVisible} onClose={toggleModal}>
         <CModalHeader closeButton>
-          <h5>Crear Nuevo Usuario</h5>
+          <h5>Crear Nueva Requisicion</h5>
         </CModalHeader>
         <CModalBody>
           <NewUser />

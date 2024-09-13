@@ -25,7 +25,11 @@ export const createUserInFirestore = (user) => {
         console.log('Usuario guardado en Firestore con ID: ', docRef.id);
   
         // Luego de guardar, despacha la acción para actualizar el store
-        dispatch(setUser(user));
+        dispatch(setUser({
+          ...user,
+          successMessage: 'Correo de restablecimiento enviado. El usuario debe establecer una nueva contraseña.',
+          errorMessage: false
+        }));
   
         // Opcional: Enviar un correo de restablecimiento de contraseña si quieres que el usuario lo cambie
         // Puedes comentar o descomentar esta línea según tus necesidades
@@ -34,6 +38,11 @@ export const createUserInFirestore = (user) => {
         console.log('Correo de restablecimiento enviado. El usuario debe establecer una nueva contraseña.');
         
       } catch (error) {
+        dispatch(setUser({
+          ...user,
+          successMessage: false,
+          errorMessage: 'Error al crear usuario posiblemente ya este registrado', 
+        }));
         console.error('Error al crear usuario: ', error);
       }
     };
