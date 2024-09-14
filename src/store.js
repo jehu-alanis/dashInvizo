@@ -28,7 +28,7 @@ const changeState = (state = initialState, { type, payload }) => {
       return { ...state, requisicion: payload,  };
     case 'SET_CLEAN':   // Manejar el estado de los usuarios
       return { ...state, successMessage: false, errorMessage: false,  };
-    case 'SET_REQUISICION':   // Manejar el estado de los usuarios
+    case 'SET_NEW_REQUISICION':   // Manejar el estado de los usuarios
       return { ...state, requisicion: requisicion.concat(payload.requisicion), successMessage: false, errorMessage: false,  };
     default:
       return state;

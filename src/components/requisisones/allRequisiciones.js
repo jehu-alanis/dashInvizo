@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTable, CTableBody, CTableHead, CTableHeaderCell, CTableRow, CTableDataCell, CButton } from '@coreui/react';
-import { fetchClient } from '../../actions/fetchClient';
-
-import { cilPencil, cilTrash } from '@coreui/icons'; // Íconos de CoreUI
+import { fetchRequisicion } from '../../actions/fetchRequisicion';
+import { cilPencil, cilTrash } from '@coreui/icons';
 import CIcon from '@coreui/icons-react'
 
-const AllClients = () => {
+const AllRequisicion = () => {
     const dispatch = useDispatch();
-    const clients = useSelector(state => state.clients);
+    const requisicion = useSelector(state => state.requisicion);
 
     useEffect(() => {
-        dispatch(fetchClient());
+        dispatch(fetchRequisicion());
     }, [dispatch]);
 
     const handleEdit = (userId) => {
-        // Lógica para manejar la edición del usuario
         console.log("Editar usuario con ID:", userId);
       };
     
     const handleDelete = (userId) => {
-    // Lógica para manejar la eliminación del usuario
     console.log("Eliminar usuario con ID:", userId);
     };
 
@@ -41,15 +38,15 @@ const AllClients = () => {
         </CTableRow>
       </CTableHead>
       <CTableBody>
-        {clients.map((user, index) => (
-          <CTableRow key={user.id}>
-            <CTableDataCell>{user.nombre}</CTableDataCell>
-            <CTableDataCell>{user.numeroPedido}</CTableDataCell>
-            <CTableDataCell>{user.graduacionOD}</CTableDataCell>
-            <CTableDataCell>{user.graduacionOI}</CTableDataCell>
-            <CTableDataCell>{user.tipoArmazon}</CTableDataCell>
-            <CTableDataCell>{user.tipoMica}</CTableDataCell>
-            <CTableDataCell>{user.tipoReflejo}</CTableDataCell>
+        {requisicion.map((item, index) => (
+          <CTableRow key={item.id}>
+            <CTableDataCell>{item.nombre}</CTableDataCell>
+            <CTableDataCell>{item.numeroPedido}</CTableDataCell>
+            <CTableDataCell>{item.graduacionOD}</CTableDataCell>
+            <CTableDataCell>{item.graduacionOI}</CTableDataCell>
+            <CTableDataCell>{item.tipoArmazon}</CTableDataCell>
+            <CTableDataCell>{item.tipoMica}</CTableDataCell>
+            <CTableDataCell>{item.tipoReflejo}</CTableDataCell>
             <CTableDataCell>
               <CButton size="sm" className="mr-2" onClick={() => handleEdit(user.id)}>
                 <CIcon icon={cilPencil}  className="text-info"/> Editar
@@ -65,4 +62,4 @@ const AllClients = () => {
   );
 };
 
-export default AllClients;
+export default AllRequisicion;

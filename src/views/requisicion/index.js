@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { CCard, CCardHeader, CCardBody, CButton, CModal, CModalHeader, CModalBody, CModalFooter } from '@coreui/react';
 
-import NewUser from '../../components/requisisones/addCliente';
-import AllClient from '../../components/requisisones/allClients';
+
+import AllRequisicion from '../../components/requisisones/allRequisiciones';
+import NewRequisicion from '../../components/requisisones/addRequisicion'
 
 import { setClean } from '../../actions/setClean';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,7 +34,7 @@ const Index = () => {
           </CButton>
         </CCardHeader>
         <CCardBody>
-          <AllClient />
+          <AllRequisicion/>
         </CCardBody>
       </CCard>
 
@@ -43,7 +44,7 @@ const Index = () => {
           <h5>Crear Nueva Requisicion</h5>
         </CModalHeader>
         <CModalBody>
-          <NewUser />
+          <NewRequisicion />
         </CModalBody>
       </CModal>
     </>
