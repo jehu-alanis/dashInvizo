@@ -11,9 +11,9 @@ const initialState = {
   errorMessage: false,
   clients: [],
   requisicion: [],
-
 };
 
+console.log(initialState.requisicion)
 const changeState = (state = initialState, { type, payload }) => {
   switch (type) {
     case 'set':
@@ -28,8 +28,14 @@ const changeState = (state = initialState, { type, payload }) => {
       return { ...state, requisicion: payload,  };
     case 'SET_CLEAN':   // Manejar el estado de los usuarios
       return { ...state, successMessage: false, errorMessage: false,  };
-    case 'SET_NEW_REQUISICION':   // Manejar el estado de los usuarios
-      return { ...state, requisicion: requisicion.concat(payload.requisicion), successMessage: false, errorMessage: false,  };
+    case 'SET_NEW_REQUISICION':
+      console.log('Payload:', payload); // Muestra el contenido del payload en la consola
+      return { 
+        ...state, 
+        requisicion: state.requisicion.concat(payload.requisicion), 
+        successMessage: payload.successMessage, 
+        errorMessage: payload.errorMessage 
+      };
     default:
       return state;
   }

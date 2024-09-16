@@ -80,7 +80,7 @@ import {
               value={reqDetails.numeroPedido}
               onChange={handleChange}
               required
-              placeholder="Ingrese el correo electrónico"
+              placeholder="Ingrese numeroPedido"
             />
           </div>
           <div className="mb-3">
@@ -91,7 +91,7 @@ import {
               value={reqDetails.graduacionOD}
               onChange={handleChange}
               required
-              placeholder="Ingrese el correo electrónico"
+              placeholder="Ingrese el graduacionOD"
             />
           </div>
           <div className="mb-3">
@@ -102,7 +102,7 @@ import {
               value={reqDetails.graduacionOI}
               onChange={handleChange}
               required
-              placeholder="Ingrese el correo electrónico"
+              placeholder="Ingrese el graduacionOI"
             />
           </div>
           <div className="mb-3">
@@ -113,7 +113,7 @@ import {
               value={reqDetails.tipoArmazon}
               onChange={handleChange}
               required
-              placeholder="Ingrese el correo electrónico"
+              placeholder="Ingrese el tipoArmazon"
             />
           </div>
           <div className="mb-3">
@@ -124,7 +124,7 @@ import {
               value={reqDetails.tipoMica}
               onChange={handleChange}
               required
-              placeholder="Ingrese el correo electrónico"
+              placeholder="Ingrese el tipoMica"
             />
           </div> <div className="mb-3">
             <CFormLabel>tipoReflejo</CFormLabel>
@@ -134,37 +134,11 @@ import {
               value={reqDetails.tipoReflejo}
               onChange={handleChange}
               required
-              placeholder="Ingrese el correo electrónico"
+              placeholder="Ingrese el tipoReflejo"
             />
           </div>
 
-          <div className="mb-3">
-            <CFormLabel>Tipo de Usuario</CFormLabel>
-            <CFormSelect
-              name="userType"
-              value={reqDetails.userType}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Seleccione un tipo de usuario</option>
-              <option value="admin">Administrador</option>
-              <option value="editor">Editor</option>
-              <option value="viewer">Visualizador</option>
-              <option value="guest">Invitado</option>
-            </CFormSelect>
-          </div>
-
-          <div className="mb-3">
-            <CFormLabel>Nombre</CFormLabel>
-            <CFormInput
-              type="text"
-              name="name"
-              value={reqDetails.name}
-              onChange={handleChange}
-              required
-              placeholder="Ingrese el nombre completo"
-            />
-          </div>
+         
 
       
           <CButton type="submit" color="primary">

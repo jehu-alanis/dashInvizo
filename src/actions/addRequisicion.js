@@ -14,17 +14,17 @@ export const createRequisicionInFirestore = (requisicion) => {
         const docRef = await addDoc(collection(db, 'requisicion'), {
           ...requisicion,
         });
-        console.log('Usuario guardado en Firestore con ID: ', docRef.id);
+        console.log('Se agrego la requisicion con exito: ', docRef.id);
         // Luego de guardar, despacha la acción para actualizar el store
         dispatch(setNewRequisicion({
-          ...requisicion,
+          requisicion:{...requisicion},
           successMessage: 'Se agrego la requisicion con exito',
           errorMessage: false
         }));      
         
       } catch (error) {
         dispatch(setNewRequisicion({
-          ...user,
+          ...requisicion,
           successMessage: false,
           errorMessage: 'Error al crear la requisicion', 
         }));
