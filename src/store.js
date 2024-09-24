@@ -1,5 +1,5 @@
 import { legacy_createStore as createStore, applyMiddleware } from 'redux';
-import { thunk } from 'redux-thunk';
+import { thunk } from 'redux-thunk';; // Importar redux-thunk correctamente
 
 const initialState = {
   sidebarShow: true,
@@ -10,36 +10,70 @@ const initialState = {
   successMessage: false,
   errorMessage: false,
   clients: [],
-  requisicion: [],
+  requisicion: [],         // Almacena las requisiciones
 };
 
-console.log(initialState.requisicion)
 const changeState = (state = initialState, { type, payload }) => {
   switch (type) {
     case 'set':
       return { ...state, ...payload };
+      
     case 'SET_AUTHENTICATED':
       return { ...state, isAuthenticated: payload };
+
     case 'SET_USER':    // Caso para actualizar el usuario
-      return { ...state, user: payload, successMessage: payload.successMessage, errorMessage: payload.errorMessage,  };
+      return { 
+        ...state, 
+        user: payload, 
+        successMessage: payload.successMessage, 
+        errorMessage: payload.errorMessage 
+      };
+
     case 'SET_USERS':   // Manejar el estado de los usuarios
-      return { ...state, users: payload,  };
-    case 'SET_REQUISICION':   // Manejar el estado de los usuarios
-      return { ...state, requisicion: payload,  };
-    case 'SET_CLEAN':   // Manejar el estado de los usuarios
-      return { ...state, successMessage: false, errorMessage: false,  };
-    case 'SET_NEW_REQUISICION':
-      console.log('Payload:', payload); // Muestra el contenido del payload en la consola
+      return { ...state, users: payload };
+
+    case 'SET_REQUISICION':   // Manejar el estado de las requisiciones
+      return { ...state, requisicion: payload };
+
+    case 'SET_CLEAN':   // Limpiar los mensajes de éxito/error
+      return { 
+        ...state, 
+        successMessage: false, 
+        errorMessage: false 
+      };
+
+    case 'SET_NEW_REQUISICION':   // Agregar nueva requisición
       return { 
         ...state, 
         requisicion: state.requisicion.concat(payload.requisicion), 
         successMessage: payload.successMessage, 
         errorMessage: payload.errorMessage 
       };
+
+    case 'UPDATE_REQUISICION':    // Editar una requisición existente
+      return { 
+        ...state, 
+        requisicion: state.requisicion.map((req) =>
+          req.id === payload.requisicion.id ? payload.requisicion : req
+        ), 
+        successMessage: payload.successMessage, 
+        errorMessage: payload.errorMessage 
+      };
+
+    case 'DELETE_REQUISICION':    // Eliminar una requisición
+      return { 
+        ...state, 
+        requisicion: state.requisicion.filter((req) => req.id !== payload), 
+        successMessage: 'Requisición eliminada con éxito',
+        errorMessage: false 
+      };
+
     default:
       return state;
   }
 };
 
+// Crear el store con redux-thunk como middleware
 const store = createStore(changeState, applyMiddleware(thunk));
+
 export default store;
