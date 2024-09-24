@@ -32,6 +32,7 @@ const AllRequisicion = () => {
           <CTableHeaderCell>Tipo de Armazon</CTableHeaderCell>
           <CTableHeaderCell>Tipo de Mica</CTableHeaderCell>
           <CTableHeaderCell>Tipo de reflejo</CTableHeaderCell>
+          <CTableHeaderCell>Estatus</CTableHeaderCell>
           <CTableHeaderCell>Acciones</CTableHeaderCell>
 
 
@@ -47,6 +48,8 @@ const AllRequisicion = () => {
             <CTableDataCell>{item.tipoArmazon}</CTableDataCell>
             <CTableDataCell>{item.tipoMica}</CTableDataCell>
             <CTableDataCell>{item.tipoReflejo}</CTableDataCell>
+            <CTableDataCell>{item.status}</CTableDataCell>
+
             <CTableDataCell>
               <CButton size="sm" className="mr-2" onClick={() => handleEdit(user.id)}>
                 <CIcon icon={cilPencil}  className="text-info"/> Editar

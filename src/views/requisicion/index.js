@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { CCard, CCardHeader, CCardBody, CButton, CModal, CModalHeader, CModalBody, CModalFooter } from '@coreui/react';
-
-
 import AllRequisicion from '../../components/requisisones/allRequisiciones';
 import NewRequisicion from '../../components/requisisones/addRequisicion'
-
 import { setClean } from '../../actions/setClean';
 import { useDispatch, useSelector } from 'react-redux';
 
