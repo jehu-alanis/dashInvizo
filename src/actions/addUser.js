@@ -1,4 +1,4 @@
-import { collection, addDoc } from 'firebase/firestore';
+/* import { collection, addDoc } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, sendPasswordResetEmail  } from 'firebase/auth';
 import { db } from '../config/firebaseConfig'; // Importa tu instancia de Firestore
 
@@ -46,4 +46,24 @@ export const createUserInFirestore = (user) => {
         console.error('Error al crear usuario: ', error);
       }
     };
+}; */
+
+// actions/userActions.js
+import { db } from '../config/firebaseConfig'; // Asegúrate de que esto sea correcto
+import { collection, addDoc } from 'firebase/firestore';
+
+// Acción para agregar un usuario
+export const addUserInFirestore = (userDetails) => {
+  return async (dispatch) => {
+    try {
+      const docRef = await addDoc(collection(db, 'users'), userDetails); // Agregar el usuario a Firestore
+      dispatch({
+        type: 'ADD_USER',
+        payload: { id: docRef.id, ...userDetails }, // Agrega el ID generado por Firestore
+      });
+    } catch (error) {
+      console.error("Error adding user: ", error);
+      // Manejo de errores
+    }
+  };
 };

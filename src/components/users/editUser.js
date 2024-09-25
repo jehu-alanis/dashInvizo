@@ -1,51 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { CForm, CFormLabel, CFormInput, CButton, CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CFormSelect } from '@coreui/react';
 import { useDispatch } from 'react-redux';
-import { createUserInFirestore } from '../../actions/addUser';
-import {
-    CForm,
-    CFormLabel,
-    CFormInput,
-    CFormSelect,
-    CButton,
-    CCard,
-    CCardBody,
-    CCardHeader,
-  } from '@coreui/react';
+import { updateUserInFirestore } from '../../actions/updateUser'; // Acción para actualizar el usuario
 
-  
-  const EditUser = () => {
-    const [userDetails, setUserDetails] = useState({
-      email: '',
-      userType: '',
-      name: '',
-    });
+const EditUser = ({ existingUser, isOpen, onClose }) => {
+  const dispatch = useDispatch();
+  const [userDetails, setUserDetails] = useState(existingUser);
 
-    const dispatch = useDispatch();
+  useEffect(() => {
+    setUserDetails(existingUser); // Establecer los detalles del usuario cuando se abra el modal
+  }, [existingUser]);
 
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      // Actualizamos el estado para el campo específico
-      setUserDetails((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserDetails((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      dispatch(createUserInFirestore(userDetails));
-      // Restablecemos el estado a los valores iniciales
-      setUserDetails({
-        email: '',
-        userType: '',
-        name: '',
-      });
-    };
-  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updateUserInFirestore(userDetails)); // Llama a la acción para actualizar el usuario
+    onClose(); // Cierra el modal después de la actualización
+  };
+
   return (
-    <CCard>
-      <CCardBody>
+    <CModal visible={isOpen} onClose={onClose}>
+      <CModalHeader>
+        <CModalTitle>Editar Usuario</CModalTitle>
+      </CModalHeader>
+      <CModalBody>
         <CForm onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <CFormLabel>Nombre</CFormLabel>
+            <CFormInput
+              type="text"
+              name="name"
+              value={userDetails.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
           <div className="mb-3">
             <CFormLabel>Email</CFormLabel>
             <CFormInput
@@ -54,10 +50,8 @@ import {
               value={userDetails.email}
               onChange={handleChange}
               required
-              placeholder="Ingrese el correo electrónico"
             />
           </div>
-
           <div className="mb-3">
             <CFormLabel>Tipo de Usuario</CFormLabel>
             <CFormSelect
@@ -73,26 +67,15 @@ import {
               <option value="guest">Invitado</option>
             </CFormSelect>
           </div>
-
-          <div className="mb-3">
-            <CFormLabel>Nombre</CFormLabel>
-            <CFormInput
-              type="text"
-              name="name"
-              value={userDetails.name}
-              onChange={handleChange}
-              required
-              placeholder="Ingrese el nombre completo"
-            />
-          </div>
-
-          <CButton type="submit" color="primary">
-            Crear Usuario
-          </CButton>
+          <CButton type="submit" color="primary">Actualizar</CButton>
         </CForm>
-      </CCardBody>
-    </CCard>
+      </CModalBody>
+      <CModalFooter>
+        <CButton color="secondary" onClick={onClose}>Cerrar</CButton>
+      </CModalFooter>
+    </CModal>
   );
 };
-  
-  export default EditUser;
+
+export default EditUser;
+
