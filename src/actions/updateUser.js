@@ -1,38 +1,23 @@
-import { db } from '../config/firebaseConfig'; // Asegúrate de que esto sea correcto
-import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
+// actions/updateUser.js
+import { db } from '../config/firebaseConfig'; // Asegúrate de que la ruta es correcta
+import { doc, updateDoc } from 'firebase/firestore';
 
-// Acción para actualizar un usuario
+// Define la acción para actualizar un usuario
 export const updateUserInFirestore = (user) => {
-  return async (dispatch) => {
-    try {
-      const userRef = doc(db, 'users', user.id); // Asegúrate de que 'users' sea tu colección
-      await updateDoc(userRef, user);
-      
-      dispatch({
-        type: 'UPDATE_USER',
-        payload: user,
-      });
-    } catch (error) {
-      console.error("Error updating user: ", error);
-      // Manejo de errores
-    }
-  };
-};
+    return async (dispatch) => {
+        const userRef = doc(db, 'users', user.id); // Asegúrate de que 'users' es el nombre de tu colección
+        try {
+            // Actualiza los datos del usuario en Firestore
+            await updateDoc(userRef, {
+                name: user.name,
+                email: user.email,
+                userType: user.userType,
+            });
 
-// Acción para eliminar un usuario
-export const deleteUserInFirestore = (userId) => {
-  return async (dispatch) => {
-    try {
-      const userRef = doc(db, 'users', userId); // Asegúrate de que 'users' sea tu colección
-      await deleteDoc(userRef);
-      
-      dispatch({
-        type: 'DELETE_USER',
-        payload: userId,
-      });
-    } catch (error) {
-      console.error("Error deleting user: ", error);
-      // Manejo de errores
-    }
-  };
+            dispatch({ type: 'UPDATE_USER_SUCCESS', payload: user }); // Opcional: Despachar éxito
+        } catch (error) {
+            console.error("Error al actualizar el usuario: ", error);
+            dispatch({ type: 'UPDATE_USER_FAILURE', payload: error.message }); // Opcional: Despachar error
+        }
+    };
 };

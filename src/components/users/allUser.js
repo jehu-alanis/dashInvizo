@@ -5,6 +5,7 @@ import { fetchUsers } from '../../actions/fetchUsers';
 import { cilPencil, cilTrash } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
 import { deleteUserInFirestore } from '../../actions/deleteUser'; // Importar la acción de eliminar usuario
+import EditUserModal from './editUserModal';
 
 const AllUsers = () => {
     const dispatch = useDispatch();
@@ -16,6 +17,17 @@ const AllUsers = () => {
     useEffect(() => {
         dispatch(fetchUsers());
     }, [dispatch]);
+
+    const handleEdit = (user) => {
+        setSelectedUser(user);
+        setModalOpen(true); // Abre el modal
+    };
+
+    // Cierra el modal de edición
+    const closeModal = () => {
+        setModalOpen(false);
+        setSelectedUser(null); // Limpia el usuario seleccionado
+    };
 
     // Maneja la eliminación de un usuario
     const handleDelete = (userId) => {

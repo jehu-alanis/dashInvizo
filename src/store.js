@@ -32,15 +32,6 @@ const changeState = (state = initialState, { type, payload }) => {
     case 'SET_USERS':   // Manejar el estado de los usuarios
       return { ...state, users: payload };
 
-      case 'ADD_USER':    // Nuevo caso para agregar un usuario
-      return {
-        ...state,
-        users: [...state.users, payload], // Agrega el nuevo usuario al estado
-        successMessage: 'Usuario agregado con éxito',
-        errorMessage: false,
-      };
-    
-
     case 'UPDATE_USER': // Agregar un caso para actualizar un usuario
       return {
         ...state,
@@ -51,14 +42,13 @@ const changeState = (state = initialState, { type, payload }) => {
         errorMessage: false,
       };
 
-      case 'DELETE_USER': // Agregar un caso para eliminar un usuario
+    case 'DELETE_USER': // Agregar un caso para eliminar un usuario
       return {
         ...state,
         users: state.users.filter((user) => user.id !== payload),
         successMessage: 'Usuario eliminado con éxito',
         errorMessage: false,
       };
-    
 
     case 'SET_REQUISICION':   // Manejar el estado de las requisiciones
       return { ...state, requisicion: payload };
@@ -105,4 +95,5 @@ const changeState = (state = initialState, { type, payload }) => {
 const store = createStore(changeState, applyMiddleware(thunk));
 
 export default store; 
+
 
