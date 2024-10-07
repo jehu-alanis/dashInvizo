@@ -13,12 +13,12 @@ export const createRequisicionInFirestore = (requisicion) => {
         // Agrega requisicion a Firestore
         const docRef = await addDoc(collection(db, 'requisicion'), {
           ...requisicion,
-          status: 'en proceso', 
+          status: 'en proceso',
         });
         console.log('Se agrego la requisicion con exito: ', docRef.id);
         // Luego de guardar, despacha la acción para actualizar el store
         dispatch(setNewRequisicion({
-          requisicion:{...requisicion},
+          requisicion: { ...requisicion, status: 'en proceso' },
           successMessage: 'Se agrego la requisicion con exito',
           errorMessage: false
         }));      

@@ -37,7 +37,7 @@ const _nav = [
   {//elementos del sidebar
     component: CNavItem,
     name: 'Clientes',
-    to: '/home/',
+    to: '/clientes',
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
   },
   {
@@ -49,7 +49,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Inventario',
-    to: '/theme/typography',
+    to: '/inventario',
     icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {

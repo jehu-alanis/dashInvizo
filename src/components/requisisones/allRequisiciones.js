@@ -42,26 +42,38 @@ const AllRequisicion = () => {
         <CTable striped hover>
             <CTableHead>
                 <CTableRow>
-                    <CTableHeaderCell>Nombre</CTableHeaderCell>
-                    <CTableHeaderCell>N Pedido</CTableHeaderCell>
-                    <CTableHeaderCell>Graduacion Ojo D</CTableHeaderCell>
-                    <CTableHeaderCell>Graduacion Ojo I</CTableHeaderCell>
-                    <CTableHeaderCell>Tipo de Armazon</CTableHeaderCell>
-                    <CTableHeaderCell>Tipo de Mica</CTableHeaderCell>
-                    <CTableHeaderCell>Tipo de Reflejo</CTableHeaderCell>
+                    <CTableHeaderCell>Id Venta</CTableHeaderCell>
+                    <CTableHeaderCell>Folio cliente</CTableHeaderCell>
+                    <CTableHeaderCell>Cliente</CTableHeaderCell>
+                    <CTableHeaderCell>OD</CTableHeaderCell>
+                    <CTableHeaderCell>OI</CTableHeaderCell>
+                    <CTableHeaderCell>ADD</CTableHeaderCell>
+
+                    <CTableHeaderCell>Material</CTableHeaderCell>
+                    <CTableHeaderCell>Clase</CTableHeaderCell>
+                    <CTableHeaderCell>Armazon</CTableHeaderCell>
+                    <CTableHeaderCell>Bicel</CTableHeaderCell>
+
+                    <CTableHeaderCell>Estatus</CTableHeaderCell>
                     <CTableHeaderCell>Acciones</CTableHeaderCell>
                 </CTableRow>
             </CTableHead>
             <CTableBody>
                 {requisiciones.map((item) => (
                     <CTableRow key={item.id}>
-                        <CTableDataCell>{item.nombre}</CTableDataCell>
+                        <CTableDataCell>{item.idVenta}</CTableDataCell>
                         <CTableDataCell>{item.numeroPedido}</CTableDataCell>
+                        <CTableDataCell>{item.nombre}</CTableDataCell>
                         <CTableDataCell>{item.graduacionOD}</CTableDataCell>
                         <CTableDataCell>{item.graduacionOI}</CTableDataCell>
-                        <CTableDataCell>{item.tipoArmazon}</CTableDataCell>
                         <CTableDataCell>{item.tipoMica}</CTableDataCell>
+                        <CTableDataCell>{item.material}</CTableDataCell>
+
+                        <CTableDataCell>{item.clase}</CTableDataCell>
+
+                        <CTableDataCell>{item.tipoArmazon}</CTableDataCell>
                         <CTableDataCell>{item.tipoReflejo}</CTableDataCell>
+                        <CTableDataCell>{item.status}</CTableDataCell>
                         <CTableDataCell>
                             <CButton size="sm" className="mr-2" onClick={() => handleEdit(item)}>
                                 <CIcon icon={cilPencil} className="text-info"/> Editar

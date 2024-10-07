@@ -10,7 +10,12 @@ const initialState = {
   successMessage: false,
   errorMessage: false,
   clients: [],
-  requisicion: [],         // Almacena las requisiciones
+  requisicion: [],
+  add: [],
+  material: [],
+  clase: [],
+  armazon: [],
+  bicel: [],
 };
 
 const changeState = (state = initialState, { type, payload }) => {
@@ -67,7 +72,60 @@ const changeState = (state = initialState, { type, payload }) => {
         successMessage: 'Requisición eliminada con éxito',
         errorMessage: false 
       };
-
+    case 'SET_CLIENTS':   // Manejar el estado de los usuarios
+      return { ...state, clients: payload };
+    case 'SET_NEW_CLIENT':   // Agregar nueva requisición
+      return { 
+        ...state, 
+        clients: state.clients.concat(payload.clients), 
+        successMessage: payload.successMessage, 
+        errorMessage: payload.errorMessage 
+      };
+    case 'SET_MATERIAL':   // Manejar el estado de los usuarios
+      return { ...state, material: payload };
+    case 'SET_CLASE':   // Manejar el estado de los usuarios
+      return { ...state, clase: payload };
+    case 'SET_BICEL':   // Manejar el estado de los usuarios
+      return { ...state, bicel: payload };
+    case 'SET_ARMAZON':   // Manejar el estado de los usuarios
+      return { ...state, armazon: payload };
+    case 'SET_ADD':   // Manejar el estado de los usuarios
+      return { ...state, add: payload };
+    case 'SET_NEW_ADD':
+      return { 
+        ...state, 
+        add: state.add.concat(payload.Add), 
+        successMessage: payload.successMessage, 
+        errorMessage: payload.errorMessage 
+      };
+    case 'SET_NEW_ARMAZON':
+        return { 
+          ...state, 
+          armazon: state.add.concat(payload.Armazon), 
+          successMessage: payload.successMessage, 
+          errorMessage: payload.errorMessage 
+        };
+    case 'SET_NEW_MATERIAL':
+        return { 
+          ...state, 
+          material: state.material.concat(payload.Material), 
+          successMessage: payload.successMessage, 
+          errorMessage: payload.errorMessage 
+        };
+    case 'SET_NEW_BICEL':
+          return { 
+            ...state, 
+            bicel: state.bicel.concat(payload.Bicel), 
+            successMessage: payload.successMessage, 
+            errorMessage: payload.errorMessage 
+          };
+    case 'SET_NEW_CLASE':
+            return { 
+              ...state, 
+              clase: state.clase.concat(payload.Clase), 
+              successMessage: payload.successMessage, 
+              errorMessage: payload.errorMessage 
+            };
     default:
       return state;
   }
