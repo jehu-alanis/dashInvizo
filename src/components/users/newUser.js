@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUserInFirestore } from '../../actions/addUser';
+import { addUserInFirestore } from '../../actions/addUser';
 import {
     CForm,
     CFormLabel,
@@ -46,7 +46,7 @@ import {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      dispatch(createUserInFirestore(userDetails));
+      dispatch(addUserInFirestore(userDetails));
       // Restablecemos el estado a los valores iniciales
       setUserDetails({
         email: '',

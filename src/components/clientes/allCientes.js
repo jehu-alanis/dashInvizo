@@ -35,7 +35,7 @@ const AllClientes = () => {
       <CTableBody>
         {users.map((user, index) => (
           <CTableRow key={user.id}>
-            <CTableDataCell>{user.id}</CTableDataCell>
+            <CTableDataCell>{user.folio}</CTableDataCell>
             <CTableDataCell>{user.name}</CTableDataCell>
             <CTableDataCell>
               <CButton size="sm" className="mr-2" onClick={() => handleEdit(user.id)}>

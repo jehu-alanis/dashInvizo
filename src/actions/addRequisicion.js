@@ -9,6 +9,8 @@ export const setNewRequisicion = (requisicion) => ({
 
 export const createRequisicionInFirestore = (requisicion) => {
     return async (dispatch) => {
+      console.log('llegue al dispach: ');
+
       try {
         // Agrega requisicion a Firestore
         const docRef = await addDoc(collection(db, 'requisicion'), {

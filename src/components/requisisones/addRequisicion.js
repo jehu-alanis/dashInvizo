@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUserInFirestore } from '../../actions/addUser';
 import { fetchClients } from '../../actions/fetchClientes';
+import Select from 'react-select';
 
 import { createRequisicionInFirestore } from '../../actions/addRequisicion';
 
@@ -30,12 +30,13 @@ import {
       clase:"",
       idVenta: "",
     });
+console.log(reqDetails,"reqDetails")
+    const [searchTerm, setSearchTerm] = useState('');
 
     const successMessage = useSelector((state) => state.successMessage);
     const errorMessage = useSelector((state) => state.errorMessage);
     const clients = useSelector((state) => state.clients);
 
-console.log(clients,"clients")
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -52,6 +53,7 @@ console.log(clients,"clients")
     };
 
     const handleSubmit = (e) => {
+      console.log("llegue",e)
       e.preventDefault();
       dispatch(createRequisicionInFirestore(reqDetails));
       // Restablecemos el estado a los valores iniciales
@@ -68,6 +70,37 @@ console.log(clients,"clients")
         idVenta: "",
       });
     };
+
+    const handleClientChange = (selectedOption) => {
+      console.log(selectedOption,"selectedOption.value")
+      const name = selectedOption.label;
+      if (name) {
+        const selectedClient = clients.find((client) => client.name == name);
+      console.log(selectedClient,"selectedClient")
+
+    // Si el cliente existe, actualizamos también el folio
+        if (selectedClient) {
+          setReqDetails((prevState) => ({
+            ...prevState,
+            nombre: selectedClient.name || '',
+            numeroPedido: selectedClient.folio || '', // Supongo que el cliente tiene una propiedad 'folio'
+          }));
+        }
+      } else {
+        // Actualizamos el estado solo para los demás campos
+        setReqDetails((prevState) => ({
+          ...prevState,
+          nombre:  selectedClient.name || '',
+          numeroPedido: selectedClient.folio || '',
+        }));
+      }
+    };
+    
+    const clientOptions = clients.map((client) => ({
+      value: client.name,
+      label: client.name,
+    }));
+    
   
     return (
       <>
@@ -75,6 +108,29 @@ console.log(clients,"clients")
         <CCardBody>
           <CForm onSubmit={handleSubmit}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '15px' }}>
+            <div style={{ flex: 1, minWidth: '200px' }}>
+              <CFormLabel>Cliente</CFormLabel>
+              <Select
+                name="nombre"
+                value={clientOptions.find(option => option.value === reqDetails.nombre)|| null}
+                onChange={handleClientChange}
+                options={clientOptions}
+                placeholder="Ingrese el Cliente"
+                isSearchable // Habilita la búsqueda
+              />
+            </div>
+
+              <div style={{ flex: 1, minWidth: '200px' }}>
+                <CFormLabel>Folio cliente</CFormLabel>
+                <CFormInput
+                  type="text"
+                  name="numeroPedido"
+                  value={reqDetails.numeroPedido}
+                  readOnly
+                  placeholder="Ingrese Folio cliente"
+                />
+              </div>
+    
               <div style={{ flex: 1, minWidth: '200px' }}>
                 <CFormLabel>Id venta</CFormLabel>
                 <CFormInput
@@ -87,36 +143,6 @@ console.log(clients,"clients")
                 />
               </div>
     
-              <div style={{ flex: 1, minWidth: '200px' }}>
-                <CFormLabel>Folio cliente</CFormLabel>
-                <CFormInput
-                  type="text"
-                  name="numeroPedido"
-                  value={reqDetails.numeroPedido}
-                  onChange={handleChange}
-                  required
-                  placeholder="Ingrese Folio cliente"
-                />
-              </div>
-    
-              <div style={{ flex: 1, minWidth: '200px' }}>
-                <CFormLabel>Cliente</CFormLabel>
-                <CFormSelect
-                  name="nombre"
-                  value={reqDetails.nombre}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="" disabled>
-                    Ingrese el Cliente
-                  </option>
-                  {clients.map((client) => (
-                    <option key={client.id} value={client.nombre}>
-                      {client.name}
-                    </option>
-                  ))}
-                </CFormSelect>
-              </div>
     
               <div style={{ flex: 1, minWidth: '200px' }}>
                 <CFormLabel>graduacionOD</CFormLabel>
@@ -243,16 +269,16 @@ console.log(clients,"clients")
               </div>
             </div>
     
-            
+            <CButton type="submit" color="primary" style={{ top: 1}}>
+            Crear Requisicion
+          </CButton>
           </CForm>
           
           {errorMessage && <div className="mt-3 alert alert-danger">{errorMessage}</div>}
           {successMessage && <div className="mt-3 alert alert-success">{successMessage}</div>}
         </CCardBody>
       </CCard>
-      <CButton type="submit" color="primary">
-        Crear Requisicion
-      </CButton>
+      
     </>
 
     );

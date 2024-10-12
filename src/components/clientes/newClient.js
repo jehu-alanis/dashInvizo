@@ -16,6 +16,7 @@ import {
   const NewClient = () => {
     const [userDetails, setUserDetails] = useState({
       name: '',
+      folio: '',
     });
     const successMessage = useSelector((state) => state.successMessage);
     const errorMessage = useSelector((state) => state.errorMessage);
@@ -37,6 +38,7 @@ import {
       // Restablecemos el estado a los valores iniciales
       setUserDetails({
         name: '',
+        folio: '',
       });
     };
   
@@ -55,6 +57,20 @@ import {
               placeholder="Ingrese el nombre completo"
             />
           </div>
+          <div className="mb-3">
+            <CFormLabel>Folio Ciente</CFormLabel>
+            <CFormInput
+              type="text"
+              name="folio"
+              value={userDetails.folio}
+              onChange={handleChange}
+              required
+              placeholder="Ingrese el Folio Ciente"
+            />
+            
+          </div>
+
+          
           <CButton type="submit" color="primary">
             Crear Usuario
           </CButton>

@@ -7,7 +7,7 @@ export const setUser = (user) => ({
   payload: user,
 });
 
-export const createUserInFirestore = (user) => {
+export const addUserInFirestore = (user) => {
     return async (dispatch) => {
       const auth = getAuth(); // Obtén la instancia de Auth
   
@@ -46,4 +46,5 @@ export const createUserInFirestore = (user) => {
         console.error('Error al crear usuario: ', error);
       }
     };
-};
+}; 
+

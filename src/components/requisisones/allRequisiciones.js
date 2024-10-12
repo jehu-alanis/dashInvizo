@@ -7,6 +7,7 @@ import { deleteRequisicionInFirestore } from '../../actions/deleteRequisicion'; 
 import { cilPencil, cilTrash } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
 import UpdateRequisicion from './UpdateRequisicion';  // Importamos el componente de actualización
+import Swal from 'sweetalert2';
 
 const AllRequisicion = () => {
     const dispatch = useDispatch();
@@ -32,9 +33,24 @@ const AllRequisicion = () => {
 
     // Función para eliminar requisición
     const handleDelete = (requisicionId) => {
-        if (window.confirm("¿Estás seguro de que deseas eliminar esta requisición?")) {
-            dispatch(deleteRequisicionInFirestore(requisicionId));
-        }
+        
+        Swal.fire({
+            title: "¿Estás seguro?",
+            text: " Vas a eliminar esta requisición!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+            }
+        });
     };
 
     return (
@@ -73,7 +89,21 @@ const AllRequisicion = () => {
 
                         <CTableDataCell>{item.tipoArmazon}</CTableDataCell>
                         <CTableDataCell>{item.tipoReflejo}</CTableDataCell>
-                        <CTableDataCell>{item.status}</CTableDataCell>
+                        <CTableDataCell>
+                            <span
+                              className={
+                                item.status === "en proceso"
+                                  ? "badge bg-warning text-dark"
+                                  : item.status === "cancelado"
+                                  ? "badge bg-danger"
+                                  : item.status === "pagado"
+                                  ? "badge bg-success"
+                                  : "badge bg-secondary"
+                              }
+                                >
+                                {item.status}
+                            </span>
+                        </CTableDataCell>
                         <CTableDataCell>
                             <CButton size="sm" className="mr-2" onClick={() => handleEdit(item)}>
                                 <CIcon icon={cilPencil} className="text-info"/> Editar

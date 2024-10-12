@@ -1,5 +1,5 @@
 import { legacy_createStore as createStore, applyMiddleware } from 'redux';
-import { thunk } from 'redux-thunk';; // Importar redux-thunk correctamente
+import {thunk} from 'redux-thunk'; // Importar redux-thunk correctamente
 
 const initialState = {
   sidebarShow: true,
@@ -22,7 +22,7 @@ const changeState = (state = initialState, { type, payload }) => {
   switch (type) {
     case 'set':
       return { ...state, ...payload };
-      
+
     case 'SET_AUTHENTICATED':
       return { ...state, isAuthenticated: payload };
 
@@ -36,6 +36,24 @@ const changeState = (state = initialState, { type, payload }) => {
 
     case 'SET_USERS':   // Manejar el estado de los usuarios
       return { ...state, users: payload };
+
+    case 'UPDATE_USER': // Agregar un caso para actualizar un usuario
+      return {
+        ...state,
+        users: state.users.map((user) => 
+          user.id === payload.id ? { ...user, ...payload } : user
+        ),
+        successMessage: 'Usuario actualizado con éxito',
+        errorMessage: false,
+      };
+
+    case 'DELETE_USER': // Agregar un caso para eliminar un usuario
+      return {
+        ...state,
+        users: state.users.filter((user) => user.id !== payload),
+        successMessage: 'Usuario eliminado con éxito',
+        errorMessage: false,
+      };
 
     case 'SET_REQUISICION':   // Manejar el estado de las requisiciones
       return { ...state, requisicion: payload };
@@ -134,4 +152,6 @@ const changeState = (state = initialState, { type, payload }) => {
 // Crear el store con redux-thunk como middleware
 const store = createStore(changeState, applyMiddleware(thunk));
 
-export default store;
+export default store; 
+
+
