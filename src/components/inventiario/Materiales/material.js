@@ -33,9 +33,11 @@ const Material = () => {
 
 return (
   <>
+  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <h5>Material</h5>
+  </div>
   <CTable striped hover>
     <CTableHead>
-    Material
       <CTableRow>
         <CTableHeaderCell>Nombre</CTableHeaderCell>
         <CTableHeaderCell>Tipo</CTableHeaderCell>

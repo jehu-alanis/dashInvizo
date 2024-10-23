@@ -16,6 +16,7 @@ const initialState = {
   clase: [],
   armazon: [],
   bicel: [],
+  ventas: [],
 };
 
 const changeState = (state = initialState, { type, payload }) => {
@@ -144,6 +145,15 @@ const changeState = (state = initialState, { type, payload }) => {
               successMessage: payload.successMessage, 
               errorMessage: payload.errorMessage 
             };
+    case 'COPY_REQUISICION_TO_VENTAS':    // Editar una requisición existente
+            return { 
+              ...state, 
+              ventas: state.ventas.concat(payload.requisicion),
+              successMessage: payload.successMessage, 
+              errorMessage: payload.errorMessage 
+            };
+    case 'SET_VENTAS':   // Manejar el estado de las requisiciones
+          return { ...state, ventas: payload };
     default:
       return state;
   }

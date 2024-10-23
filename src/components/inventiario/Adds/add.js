@@ -34,9 +34,11 @@ console.log(add,"add")
 
   return (
     <>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <h5>ADD</h5>
+    </div>
     <CTable striped hover>
       <CTableHead>
-      ADD
         <CTableRow>
           <CTableHeaderCell>Nombre</CTableHeaderCell>
           <CTableHeaderCell>Tipo</CTableHeaderCell>

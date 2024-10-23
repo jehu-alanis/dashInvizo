@@ -61,7 +61,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Ventas',
-    to: '/home/',
+    to: '/ventas/',
     icon: <CIcon icon={cilDollar} customClassName="nav-icon" />,
   },
 ]

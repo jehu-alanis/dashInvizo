@@ -33,9 +33,11 @@ const Clase = () => {
 
 return (
   <>
+  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <h5>Clase</h5>
+  </div>
   <CTable striped hover>
     <CTableHead>
-    Clase
       <CTableRow>
         <CTableHeaderCell>Nombre</CTableHeaderCell>
         <CTableHeaderCell>Tipo</CTableHeaderCell>

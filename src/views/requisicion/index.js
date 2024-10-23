@@ -35,7 +35,7 @@ const Index = () => {
         </CCardBody>
       </CCard>
 
-      {/* Modal para agregar un nuevo usuario */}
+      {/* Modal para agregar un nuevo NewRequisicion */}
       <CModal visible={modalVisible} onClose={toggleModal}>
         <CModalHeader closeButton>
           <h5>Crear Nueva Requisicion</h5>

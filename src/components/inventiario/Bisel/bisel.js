@@ -33,9 +33,11 @@ const Bicel = () => {
 
 return (
   <>
+  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <h5>Bicel</h5>
+  </div>
   <CTable striped hover>
     <CTableHead>
-    Bicel
       <CTableRow>
         <CTableHeaderCell>Nombre</CTableHeaderCell>
         <CTableHeaderCell>Tipo</CTableHeaderCell>

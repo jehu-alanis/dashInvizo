@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTable, CTableBody, CTableHead, CTableHeaderCell, CTableRow, CTableDataCell, CButton, CModal, CModalBody, CModalHeader } from '@coreui/react';
 import { fetchRequisicion } from '../../actions/fetchRequisicion';
-import { updateRequisicionInFirestore } from '../../actions/updateRequisicion';
-import { deleteRequisicionInFirestore } from '../../actions/deleteRequisicion';  // Importamos la acción de eliminar
-import { cilPencil, cilTrash } from '@coreui/icons';
+import { cilPencil, cilTrash, cilSync} from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
-import UpdateRequisicion from './UpdateRequisicion';  // Importamos el componente de actualización
+import UpdateRequisicion from './UpdateRequisicion';
+import UpdateStatus from '../requisisones/updateStatus';
 import Swal from 'sweetalert2';
+import { deleteRequisicionInFirestore } from '../../actions/deleteRequisicion';
 
 const AllRequisicion = () => {
     const dispatch = useDispatch();
@@ -15,6 +15,11 @@ const AllRequisicion = () => {
     
     const [selectedRequisicion, setSelectedRequisicion] = useState(null); // Requisición seleccionada para editar
     const [modalVisible, setModalVisible] = useState(false);  // Estado para controlar la visibilidad del modal
+
+     // Requisición seleccionada para editar
+     const [selectedStatusRequisicion, setSelectedStatusRequisicion] = useState(null); // Requisición seleccionada para editar
+    
+     const [modalVisibleStatus, setModalVisibleStatus] = useState(false);  // Estado para controlar la visibilidad del modal
 
     useEffect(() => {
         dispatch(fetchRequisicion()); // Se obtiene la lista de requisiciones desde Firestore
@@ -26,9 +31,19 @@ const AllRequisicion = () => {
         setModalVisible(true);  // Mostramos el modal
     };
 
+    const handleEditSatus = (requisicion) => {
+        setSelectedStatusRequisicion(requisicion);  // Guardamos la requisición seleccionada en el estado
+        setModalVisibleStatus(true);  // Mostramos el modal
+    };
+    
+
      // Función para cerrar el modal
-     const toggleModal = () => {
+    const toggleModal = () => {
         setModalVisible(!modalVisible);  // Cambia el estado del modal (abrir/cerrar)
+    };
+
+    const toggleModalStatus = () => {
+        setModalVisibleStatus(!modalVisible);  // Cambia el estado del modal (abrir/cerrar)
     };
 
     // Función para eliminar requisición
@@ -44,6 +59,7 @@ const AllRequisicion = () => {
             confirmButtonText: "Si"
           }).then((result) => {
             if (result.isConfirmed) {
+                dispatch(deleteRequisicionInFirestore(requisicionId))
               Swal.fire({
                 title: "Deleted!",
                 text: "Your file has been deleted.",
@@ -103,6 +119,9 @@ const AllRequisicion = () => {
                                 >
                                 {item.status}
                             </span>
+                            <button className="btn btn-sm btn-light ms-2" onClick={() => handleEditSatus(item)}>
+                                <CIcon  icon={cilSync}/>
+                            </button>
                         </CTableDataCell>
                         <CTableDataCell>
                             <CButton size="sm" className="mr-2" onClick={() => handleEdit(item)}>
@@ -123,6 +142,15 @@ const AllRequisicion = () => {
             <CModalBody>
                 {selectedRequisicion && (
                     <UpdateRequisicion requisicion={selectedRequisicion} onClose={toggleModal} />
+                )}
+            </CModalBody>
+        </CModal>
+         {/* Modal para editar el estado */}
+        <CModal visible={modalVisibleStatus} onClose={() => setModalVisibleStatus(false)}>
+            <CModalHeader closeButton>Editar estado</CModalHeader>
+            <CModalBody>
+                {selectedStatusRequisicion && (
+                    <UpdateStatus requisicion={selectedStatusRequisicion} onClose={toggleModalStatus} />
                 )}
             </CModalBody>
         </CModal>

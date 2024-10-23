@@ -42,6 +42,7 @@ const AllUsers = () => {
             confirmButtonText: "Si"
           }).then((result) => {
             if (result.isConfirmed) {
+                dispatch(deleteUserInFirestore(userId))
               Swal.fire({
                 title: "Deleted!",
                 text: "Your file has been deleted.",

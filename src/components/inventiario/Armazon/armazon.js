@@ -34,9 +34,11 @@ const Armazon = () => {
 
   return (
     <>
+     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <h5>Armazon</h5>
+     </div>
     <CTable striped hover>
       <CTableHead>
-      Armazon
         <CTableRow>
           <CTableHeaderCell>Nombre</CTableHeaderCell>
           <CTableHeaderCell>Tipo</CTableHeaderCell>

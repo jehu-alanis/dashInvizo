@@ -242,8 +242,8 @@ console.log(reqDetails,"reqDetails")
               <div style={{ flex: 1, minWidth: '200px' }}>
                 <CFormLabel>Bicel</CFormLabel>
                 <CFormSelect
-                  name="tipoMica"
-                  value={reqDetails.tipoMica}
+                  name="tipoReflejo"
+                  value={reqDetails.tipoReflejo}
                   onChange={handleChange}
                   required
                 >
@@ -256,20 +256,9 @@ console.log(reqDetails,"reqDetails")
                 </CFormSelect>
               </div>
     
-              <div style={{ flex: 1, minWidth: '200px' }}>
-                <CFormLabel>tipoReflejo</CFormLabel>
-                <CFormInput
-                  type="text"
-                  name="tipoReflejo"
-                  value={reqDetails.tipoReflejo}
-                  onChange={handleChange}
-                  required
-                  placeholder="Ingrese el tipoReflejo"
-                />
-              </div>
             </div>
     
-            <CButton type="submit" color="primary" style={{ top: 1}}>
+            <CButton type="submit" color="primary" style={{ marginTop: '10px' }}>
             Crear Requisicion
           </CButton>
           </CForm>
