@@ -3,9 +3,9 @@ const { Parser } = require('json2csv');
 const fs = require('fs');
 
 // Credenciales de Zendesk
-const zendeskEmail = 'alan@onefacture.com';
-const zendeskToken = 'hhFddoehvLCWazZrJousyqDggZcOqdv7PGOdlEld';
-const zendeskSubdomain = 'onefacture'; // Cambia esto a tu subdominio de Zendesk
+const zendeskEmail = '';
+const zendeskToken = '';
+const zendeskSubdomain = ''; // Cambia esto a tu subdominio de Zendesk
 
 
 // Configuración de autenticación
