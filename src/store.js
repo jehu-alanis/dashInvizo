@@ -22,7 +22,8 @@ const initialState = {
 const changeState = (state = initialState, { type, payload }) => {
   switch (type) {
     case 'set':
-      return { ...state, ...payload };
+      console.log('Payload:', payload);
+      return { ...state, sidebarShow: payload };
 
     case 'SET_AUTHENTICATED':
       return { ...state, isAuthenticated: payload };

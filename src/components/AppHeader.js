@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -33,8 +33,8 @@ const AppHeader = () => {
   const { colorMode, setColorMode } = useColorModes('coreui-free-react-admin-template-theme')
 
   const dispatch = useDispatch()
-  const sidebarShow = useSelector((state) => state.sidebarShow)
-
+  //const sidebarShow = useSelector((state) => state.sidebarShow)
+  const [sidebarShow, setSidebarShow] = useState(true);
   useEffect(() => {
     document.addEventListener('scroll', () => {
       headerRef.current &&
@@ -42,11 +42,16 @@ const AppHeader = () => {
     })
   }, [])
 
+  const handleChange = (prevState) => {
+    setSidebarShow((prevState) => (!prevState))
+    dispatch({ type: 'set', payload: !prevState })
+  };
+
   return (
     <CHeader position="sticky" className="mb-4 p-0" ref={headerRef}>
       <CContainer className="border-bottom px-4" fluid>
         <CHeaderToggler
-          onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
+          onClick={() => handleChange(sidebarShow)}
           style={{ marginInlineStart: '-14px' }}
         >
           <CIcon icon={cilMenu} size="lg" />
@@ -59,7 +64,7 @@ const AppHeader = () => {
           </CNavItem>
           {/* <CNavItem>
             <CNavLink href="#">Users</CNavLink>
-          </CNavItem>
+          </CNavItem> handleChange(sidebarShow)
           <CNavItem>
             <CNavLink href="#">Settings</CNavLink>
           </CNavItem> */}
